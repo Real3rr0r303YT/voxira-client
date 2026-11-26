@@ -62,15 +62,11 @@ Danach erscheint es automatisch im Mod-Menü, und sein Zustand wird in der Confi
 
 ### Neues Release veröffentlichen
 
-1. `mod_version` in `gradle.properties` erhöhen
-2. Optional Release-Notes unter `.github/release-notes/vX.Y.Z.md` anlegen
-3. Committen, dann den Tag pushen:
+1. `mod_version` in `gradle.properties` erhöhen, z. B. auf `0.2.0`
+2. Optional Release-Notes unter `.github/release-notes/v0.2.0.md` anlegen
+3. Auf `main` pushen
 
-```bash
-git tag v0.2.0 && git push origin v0.2.0
-```
-
-GitHub baut die JAR und veröffentlicht das Release automatisch. Versionen `v0.x` werden als Pre-Release markiert.
+GitHub baut die JAR und erstellt Tag und Release automatisch. Versionen `0.x` werden als Pre-Release markiert.
 
 ### Website
 

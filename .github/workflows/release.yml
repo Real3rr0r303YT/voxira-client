@@ -1,37 +1,67 @@
 name: Release
 
-# Neues Release: Version in gradle.properties erhöhen, optional
-# .github/release-notes/vX.Y.Z.md anlegen, dann Tag pushen:
-#   git tag v0.2.0 && git push origin v0.2.0
+# Neues Release: mod_version in gradle.properties erhöhen, optional
+# .github/release-notes/vX.Y.Z.md anlegen und auf main pushen.
+# Gibt es für die Version noch kein Release, wird es automatisch erstellt.
 on:
   push:
-    tags: ['v*']
+    branches: [main]
+    paths:
+      - gradle.properties
+      - .github/release-notes/**
+      - .github/workflows/release.yml
+  workflow_dispatch:
 
 permissions:
   contents: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
 
 jobs:
   release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Version lesen
+        id: version
+        run: |
+          v=$(grep -E '^mod_version=' gradle.properties | cut -d= -f2 | tr -d '[:space:]')
+          tag="v$v"
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+          if git rev-parse -q --verify "refs/tags/$tag" >/dev/null; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "Release $tag existiert schon, nichts zu tun."
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+          f=".github/release-notes/$tag.md"
+          if [ -f "$f" ]; then echo "notes=$f" >> "$GITHUB_OUTPUT"; else echo "notes=" >> "$GITHUB_OUTPUT"; fi
+
       - uses: actions/setup-java@v4
+        if: steps.version.outputs.exists == 'false'
         with:
           distribution: temurin
           java-version: 25
+
       - uses: gradle/actions/setup-gradle@v4
+        if: steps.version.outputs.exists == 'false'
+
       - name: Build
+        if: steps.version.outputs.exists == 'false'
         run: ./gradlew build
-      - name: Release-Notes wählen
-        id: notes
-        run: |
-          f=".github/release-notes/${GITHUB_REF_NAME}.md"
-          if [ -f "$f" ]; then echo "file=$f" >> "$GITHUB_OUTPUT"; else echo "file=" >> "$GITHUB_OUTPUT"; fi
+
       - uses: softprops/action-gh-release@v2
+        if: steps.version.outputs.exists == 'false'
         with:
-          name: Voxira Client ${{ github.ref_name }}
-          body_path: ${{ steps.notes.outputs.file }}
-          generate_release_notes: ${{ steps.notes.outputs.file == '' }}
-          prerelease: ${{ startsWith(github.ref_name, 'v0.') }}
-          files: |
-            build/libs/*.jar
+          tag_name: ${{ steps.version.outputs.tag }}
+          target_commitish: ${{ github.sha }}
+          name: Voxira Client ${{ steps.version.outputs.tag }}
+          body_path: ${{ steps.version.outputs.notes }}
+          generate_release_notes: ${{ steps.version.outputs.notes == '' }}
+          prerelease: ${{ startsWith(steps.version.outputs.tag, 'v0.') }}
+          files: build/libs/*.jar

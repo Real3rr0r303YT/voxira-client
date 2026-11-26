@@ -2,6 +2,9 @@
 
 Ein schlanker PvP- und QoL-Client als **Fabric-Mod** für **Minecraft 26.3**.
 
+**🌐 Website:** https://real3rr0r303yt.github.io/voxira-client/  
+**⬇️ Download:** [Releases](https://github.com/Real3rr0r303YT/voxira-client/releases)
+
 ## Features
 
 | Modul | Kategorie | Beschreibung |
@@ -23,7 +26,7 @@ Ein schlanker PvP- und QoL-Client als **Fabric-Mod** für **Minecraft 26.3**.
 
 1. [Fabric Loader](https://fabricmc.net/use/) für Minecraft 26.3 installieren
 2. [Fabric API](https://modrinth.com/mod/fabric-api) in den Ordner `mods` legen
-3. `voxira-client-<version>.jar` (aus den [Releases](../../releases) oder den Actions-Artefakten) ebenfalls nach `mods`
+3. `voxira-client-<version>.jar` aus den [Releases](../../releases) ebenfalls nach `mods`
 4. Mit dem Fabric-Profil starten
 
 ## Entwicklung
@@ -56,6 +59,22 @@ src/main/java/dev/voxira/client/
 2. Das Modul in `ModuleManager` per `add(new DeinModul())` registrieren
 
 Danach erscheint es automatisch im Mod-Menü, und sein Zustand wird in der Config gespeichert.
+
+### Neues Release veröffentlichen
+
+1. `mod_version` in `gradle.properties` erhöhen
+2. Optional Release-Notes unter `.github/release-notes/vX.Y.Z.md` anlegen
+3. Committen, dann den Tag pushen:
+
+```bash
+git tag v0.2.0 && git push origin v0.2.0
+```
+
+GitHub baut die JAR und veröffentlicht das Release automatisch. Versionen `v0.x` werden als Pre-Release markiert.
+
+### Website
+
+Die Website liegt in `website/` und wird bei jeder Änderung auf `main` automatisch über GitHub Pages veröffentlicht.
 
 ## Lizenz
 

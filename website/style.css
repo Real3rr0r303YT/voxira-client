@@ -261,3 +261,7 @@ details p { color: var(--dim); margin: 12px 0 0; }
   * { transition: none !important; scroll-behavior: auto !important; }
 }
 .steps[hidden] { display: none; }
+
+.shot { margin: 0; }
+.shot img { width: 100%; height: auto; border-radius: 18px; border: 1px solid var(--border); box-shadow: 0 30px 80px -30px rgba(139, 108, 255, 0.5); }
+.shot figcaption { color: var(--dim); font-size: 14px; margin-top: 14px; }

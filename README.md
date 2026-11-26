@@ -5,6 +5,8 @@ A lightweight, open-source PvP and quality-of-life client for **Minecraft 26.3**
 **🌐 Website:** https://real3rr0r303yt.github.io/voxira-client/  
 **⬇️ Download:** [Releases](https://github.com/Real3rr0r303YT/voxira-client/releases)
 
+![Voxira title screen](website/menu-preview.png)
+
 ## Features
 
 | Module | Category | Description |
@@ -22,7 +24,7 @@ A lightweight, open-source PvP and quality-of-life client for **Minecraft 26.3**
 | Fullbright | Visual | Full brightness without a gamma hack |
 | Custom Crosshair | Visual | Style, color, size, gap, thickness, outline |
 | Low Health Warning | Visual | Pulsing red screen edge when health is low |
-| Custom Main Menu | Utility | Voxira title screen |
+| Custom Main Menu | Utility | Animated Voxira title screen with parallax scene |
 | Auto Reconnect | Utility | Rejoins the last server after a countdown |
 | AutoLog | Safety | Leaves automatically on low health, hostile mobs, nearby players or players teleporting to you |
 
@@ -70,7 +72,8 @@ Requires **JDK 25**.
 src/main/java/dev/voxira/client/
 ├── VoxiraClient.java      entry point: keybinds, tick loop, HUD registration
 ├── config/                JSON config
-├── gui/                   title screen, mod menu, HUD editor, buttons, theme
+├── gui/                   title screen, mod menu, settings, HUD editor, theme
+│   └── menu/              title screen art helpers and buttons
 ├── mixin/                 Minecraft hooks (zoom, fullbright, CPS, title screen)
 ├── module/                module system
 │   ├── hud/               draggable HUD modules
@@ -94,6 +97,16 @@ It shows up in the mod menu automatically, and its state and settings are saved 
 3. Push to `main`
 
 GitHub Actions builds the JAR and creates the tag and release automatically. `0.x` versions are marked as pre-releases.
+
+### Title screen artwork
+
+The title screen images are generated, not drawn by hand:
+
+```bash
+python3 tools/generate_menu_assets.py   # needs Pillow and numpy
+```
+
+Change colors or shapes in the script and run it again to update the textures.
 
 ### Website
 

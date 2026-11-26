@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "voxira",
+  "version": "${version}",
+  "name": "Voxira Client",
+  "description": "Ein schlanker PvP- und QoL-Client für Fabric: HUD-Module, Zoom, Fullbright und ein eigenes Menü.",
+  "authors": ["Real3rr0r303YT"],
+  "contact": {
+    "sources": "https://github.com/Real3rr0r303YT/voxira-client",
+    "issues": "https://github.com/Real3rr0r303YT/voxira-client/issues"
+  },
+  "license": "GPL-3.0-only",
+  "icon": "assets/voxira/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": ["dev.voxira.client.VoxiraClient"]
+  },
+  "mixins": ["voxira.mixins.json"],
+  "depends": {
+    "fabricloader": ">=0.20.1",
+    "minecraft": "~26.3",
+    "java": ">=25",
+    "fabric-api": "*"
+  }
+}

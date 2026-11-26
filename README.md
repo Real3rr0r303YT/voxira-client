@@ -1,77 +1,85 @@
 # Voxira Client
 
-Ein schlanker PvP- und QoL-Client als **Fabric-Mod** für **Minecraft 26.3**.
+A lightweight, open-source PvP and quality-of-life client for **Minecraft 26.3**, built as a **Fabric mod**.
 
 **🌐 Website:** https://real3rr0r303yt.github.io/voxira-client/  
 **⬇️ Download:** [Releases](https://github.com/Real3rr0r303YT/voxira-client/releases)
 
 ## Features
 
-| Modul | Kategorie | Beschreibung |
+| Module | Category | Description |
 |---|---|---|
-| FPS | HUD | Aktuelle Frames pro Sekunde |
-| CPS | HUD | Klicks pro Sekunde (links / rechts) |
-| Koordinaten | HUD | Position und Blickrichtung |
-| Keystrokes | HUD | WASD, Maus und Leertaste mit CPS |
-| Armor Status | HUD | Rüstung und Item in der Hand mit Haltbarkeit |
-| Zoom | Visual | Taste **C** halten, Mausrad ändert die Stärke |
-| Fullbright | Visual | Volle Helligkeit, ohne Gamma-Hack |
-| Custom Main Menu | Utility | Eigenes Voxira-Hauptmenü |
+| FPS | HUD | Current frames per second |
+| CPS | HUD | Clicks per second (left / right) |
+| Coordinates | HUD | Position and facing direction |
+| Keystrokes | HUD | WASD, mouse buttons and space bar with CPS |
+| Armor Status | HUD | Armor and held item with durability |
+| Zoom | Visual | Hold **C**, scroll to change zoom level |
+| Fullbright | Visual | Full brightness without a gamma hack |
+| Custom Main Menu | Utility | Voxira title screen |
 
-- **Mod-Menü:** `Right Shift`. Module per Klick an- und ausschalten, nach Kategorie filtern.
-- **HUD-Editor:** im Mod-Menü auf „HUD bearbeiten“ klicken und die Module per Drag & Drop verschieben. Sie rasten an Rändern und an der Bildschirmmitte ein.
-- **Config:** `.minecraft/config/voxira.json`, wird automatisch gespeichert.
+- **Mod menu:** press `Right Shift` to toggle modules with one click and filter them by category.
+- **HUD editor:** click "HUD bearbeiten" in the mod menu, then drag modules around. They snap to the screen edges and the center.
+- **Config:** saved automatically to `.minecraft/config/voxira.json`.
+
+> The in-game UI is currently in German. English localization is planned.
 
 ## Installation
 
-1. [Fabric Loader](https://fabricmc.net/use/) für Minecraft 26.3 installieren
-2. [Fabric API](https://modrinth.com/mod/fabric-api) in den Ordner `mods` legen
-3. `voxira-client-<version>.jar` aus den [Releases](../../releases) ebenfalls nach `mods`
-4. Mit dem Fabric-Profil starten
+### CurseForge
+1. **Minecraft → Create Custom Profile**, version `26.3`, mod loader **Fabric**
+2. **Add More Content**, then search for and install **Fabric API**
+3. Click **⋮ → Open Folder → `mods`** and drop in `voxira-client-<version>.jar` from the [Releases](https://github.com/Real3rr0r303YT/voxira-client/releases) page
+4. Click **Play**
 
-## Entwicklung
+### Minecraft Launcher
+1. Install [Fabric Loader](https://fabricmc.net/use/installer/) for `26.3`
+2. Put [Fabric API](https://modrinth.com/mod/fabric-api) and `voxira-client-<version>.jar` into `%appdata%\.minecraft\mods`
+3. Start the `fabric-loader-26.3` profile
 
-Voraussetzung: **JDK 25**.
+## Development
+
+Requires **JDK 25**.
 
 ```bash
-./gradlew build        # JAR liegt danach in build/libs/
-./gradlew runClient    # Minecraft mit dem Mod starten
+./gradlew build        # the JAR ends up in build/libs/
+./gradlew runClient    # launch Minecraft with the mod
 ```
 
-### Struktur
+### Project layout
 
 ```
 src/main/java/dev/voxira/client/
-├── VoxiraClient.java      Einstiegspunkt: Keybinds, Tick, HUD-Registrierung
-├── config/                JSON-Config
-├── gui/                   Hauptmenü, Mod-Menü, HUD-Editor, Buttons, Theme
-├── mixin/                 Hooks in Minecraft (Zoom, Fullbright, CPS, Hauptmenü)
-├── module/                Modul-System
-│   ├── hud/               HUD-Module (verschiebbar)
-│   ├── visual/            Zoom, Fullbright
-│   └── utility/           Custom Main Menu
-└── util/                  CPS-Tracker
+├── VoxiraClient.java      entry point: keybinds, tick loop, HUD registration
+├── config/                JSON config
+├── gui/                   title screen, mod menu, HUD editor, buttons, theme
+├── mixin/                 Minecraft hooks (zoom, fullbright, CPS, title screen)
+├── module/                module system
+│   ├── hud/               draggable HUD modules
+│   ├── visual/            zoom, fullbright
+│   └── utility/           custom main menu
+└── util/                  CPS tracker
 ```
 
-### Eigenes Modul hinzufügen
+### Adding a module
 
-1. Eine Klasse anlegen, die von `Module` erbt (für HUD-Elemente von `HudModule`)
-2. Das Modul in `ModuleManager` per `add(new DeinModul())` registrieren
+1. Create a class that extends `Module` (or `HudModule` for HUD elements)
+2. Register it in `ModuleManager` with `add(new YourModule())`
 
-Danach erscheint es automatisch im Mod-Menü, und sein Zustand wird in der Config gespeichert.
+It shows up in the mod menu automatically, and its state is saved in the config.
 
-### Neues Release veröffentlichen
+### Publishing a release
 
-1. `mod_version` in `gradle.properties` erhöhen, z. B. auf `0.2.0`
-2. Optional Release-Notes unter `.github/release-notes/v0.2.0.md` anlegen
-3. Auf `main` pushen
+1. Bump `mod_version` in `gradle.properties`, e.g. to `0.2.0`
+2. Optionally add release notes at `.github/release-notes/v0.2.0.md`
+3. Push to `main`
 
-GitHub baut die JAR und erstellt Tag und Release automatisch. Versionen `0.x` werden als Pre-Release markiert.
+GitHub Actions builds the JAR and creates the tag and release automatically. `0.x` versions are marked as pre-releases.
 
 ### Website
 
-Die Website liegt in `website/` und wird bei jeder Änderung auf `main` automatisch über GitHub Pages veröffentlicht.
+The website lives in `website/` and is deployed to GitHub Pages on every change to `main`.
 
-## Lizenz
+## License
 
-[GPL-3.0](LICENSE). Nicht offiziell von Mojang oder Microsoft.
+[GPL-3.0](LICENSE). Not affiliated with Mojang or Microsoft.

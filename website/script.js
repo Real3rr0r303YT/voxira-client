@@ -1,4 +1,4 @@
-// --- HUD-Vorschau: lebendige Werte und Keystrokes -------------------------
+// --- HUD preview: live values and keystrokes -------------------------
 const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const $ = (s) => document.querySelector(s);
 
@@ -16,7 +16,7 @@ if (!reduced) {
     setTimeout(() => k.classList.remove('on'), ms);
   };
 
-  // Strafe-Muster: W gehalten, A/D wechseln, dazu Klicks
+  // Strafe pattern: W held, A/D alternating, plus clicks
   keys.w.classList.add('on');
   let left = true;
   setInterval(() => {
@@ -38,16 +38,16 @@ if (!reduced) {
   }, 300);
 }
 
-// --- Mod-Menü-Mock ----------------------------------------------------------
+// --- Mod menu mock ----------------------------------------------------------
 const modules = [
-  { name: 'FPS', cat: 'hud', desc: 'Aktuelle Frames pro Sekunde.', on: true },
-  { name: 'CPS', cat: 'hud', desc: 'Klicks pro Sekunde.', on: true },
-  { name: 'Koordinaten', cat: 'hud', desc: 'Position und Blickrichtung.', on: true },
-  { name: 'Keystrokes', cat: 'hud', desc: 'WASD, Maus und Leertaste.', on: true },
-  { name: 'Armor Status', cat: 'hud', desc: 'Rüstung mit Haltbarkeit.', on: true },
-  { name: 'Zoom', cat: 'visual', desc: 'C halten, Mausrad = Stärke.', on: true },
-  { name: 'Fullbright', cat: 'visual', desc: 'Höhlen ohne Fackeln.', on: false },
-  { name: 'Custom Main Menu', cat: 'utility', desc: 'Voxira-Hauptmenü.', on: true },
+  { name: 'FPS', cat: 'hud', desc: 'Current frames per second.', on: true },
+  { name: 'CPS', cat: 'hud', desc: 'Clicks per second.', on: true },
+  { name: 'Coordinates', cat: 'hud', desc: 'Position and facing.', on: true },
+  { name: 'Keystrokes', cat: 'hud', desc: 'WASD, mouse and space.', on: true },
+  { name: 'Armor Status', cat: 'hud', desc: 'Armor with durability.', on: true },
+  { name: 'Zoom', cat: 'visual', desc: 'Hold C, scroll to adjust.', on: true },
+  { name: 'Fullbright', cat: 'visual', desc: 'Caves without torches.', on: false },
+  { name: 'Custom Main Menu', cat: 'utility', desc: 'Voxira title screen.', on: true },
 ];
 const catName = { hud: 'HUD', visual: 'Visual', utility: 'Utility' };
 const grid = $('#mm-grid');
@@ -84,7 +84,7 @@ document.querySelectorAll('.mm-tabs button').forEach((b) =>
 );
 renderMenu();
 
-// --- Installations-Tabs -----------------------------------------------------
+// --- Install tabs -----------------------------------------------------
 document.querySelectorAll('.tab').forEach((t) =>
   t.addEventListener('click', () => {
     document.querySelectorAll('.tab').forEach((x) => {

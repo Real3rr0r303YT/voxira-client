@@ -4,7 +4,7 @@ import net.minecraft.client.gui.GuiGraphicsExtractor;
 
 public class FpsModule extends HudModule {
     public FpsModule() {
-        super("fps", "FPS", "Zeigt deine aktuellen Frames pro Sekunde.", true, 4, 4);
+        super("fps", "FPS", "Shows your current frames per second.", true, 4, 4);
     }
 
     private String text() {

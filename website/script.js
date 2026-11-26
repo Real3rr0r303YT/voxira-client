@@ -47,9 +47,13 @@ const modules = [
   { name: 'Armor Status', cat: 'hud', desc: 'Armor with durability.', on: true },
   { name: 'Zoom', cat: 'visual', desc: 'Hold C, scroll to adjust.', on: true },
   { name: 'Fullbright', cat: 'visual', desc: 'Caves without torches.', on: false },
+  { name: 'Custom Crosshair', cat: 'visual', desc: 'Style, color and size.', on: true },
+  { name: 'Low Health Warning', cat: 'visual', desc: 'Red edge on low health.', on: true },
   { name: 'Custom Main Menu', cat: 'utility', desc: 'Voxira title screen.', on: true },
+  { name: 'Auto Reconnect', cat: 'utility', desc: 'Rejoins after a kick.', on: false },
+  { name: 'AutoLog', cat: 'safety', desc: 'Leaves at 1 heart or when players come near.', on: false },
 ];
-const catName = { hud: 'HUD', visual: 'Visual', utility: 'Utility' };
+const catName = { hud: 'HUD', visual: 'Visual', utility: 'Utility', safety: 'Safety' };
 const grid = $('#mm-grid');
 let filter = 'all';
 

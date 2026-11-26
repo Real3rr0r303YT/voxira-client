@@ -6,7 +6,15 @@ import dev.voxira.client.module.hud.CpsModule;
 import dev.voxira.client.module.hud.FpsModule;
 import dev.voxira.client.module.hud.HudModule;
 import dev.voxira.client.module.hud.KeystrokesModule;
+import dev.voxira.client.module.hud.ClockModule;
+import dev.voxira.client.module.hud.PingModule;
+import dev.voxira.client.module.hud.ServerModule;
+import dev.voxira.client.module.hud.SpeedModule;
+import dev.voxira.client.module.utility.AutoLogModule;
+import dev.voxira.client.module.utility.AutoReconnectModule;
 import dev.voxira.client.module.utility.CustomMenuModule;
+import dev.voxira.client.module.visual.CrosshairModule;
+import dev.voxira.client.module.visual.LowHealthModule;
 import dev.voxira.client.module.visual.FullbrightModule;
 import dev.voxira.client.module.visual.ZoomModule;
 
@@ -23,9 +31,17 @@ public final class ModuleManager {
     public final CoordinatesModule coordinates = add(new CoordinatesModule());
     public final KeystrokesModule keystrokes = add(new KeystrokesModule());
     public final ArmorStatusModule armorStatus = add(new ArmorStatusModule());
+    public final PingModule ping = add(new PingModule());
+    public final ClockModule clock = add(new ClockModule());
+    public final SpeedModule speed = add(new SpeedModule());
+    public final ServerModule server = add(new ServerModule());
     public final ZoomModule zoom = add(new ZoomModule());
     public final FullbrightModule fullbright = add(new FullbrightModule());
+    public final CrosshairModule crosshair = add(new CrosshairModule());
+    public final LowHealthModule lowHealth = add(new LowHealthModule());
     public final CustomMenuModule customMenu = add(new CustomMenuModule());
+    public final AutoReconnectModule autoReconnect = add(new AutoReconnectModule());
+    public final AutoLogModule autoLog = add(new AutoLogModule());
 
     private <T extends Module> T add(T module) {
         modules.add(module);

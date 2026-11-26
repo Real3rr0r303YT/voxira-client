@@ -3,7 +3,8 @@ package dev.voxira.client.module;
 public enum Category {
     HUD("HUD"),
     VISUAL("Visual"),
-    UTILITY("Utility");
+    UTILITY("Utility"),
+    SAFETY("Safety");
 
     private final String displayName;
 

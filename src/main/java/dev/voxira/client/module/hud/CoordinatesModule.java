@@ -7,7 +7,7 @@ import java.util.Locale;
 
 public class CoordinatesModule extends HudModule {
     public CoordinatesModule() {
-        super("coordinates", "Koordinaten", "Zeigt Position und Blickrichtung.", true, 4, 40);
+        super("coordinates", "Coordinates", "Shows your position and facing.", true, 4, 40);
     }
 
     @Override

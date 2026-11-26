@@ -14,15 +14,33 @@ A lightweight, open-source PvP and quality-of-life client for **Minecraft 26.3**
 | Coordinates | HUD | Position and facing direction |
 | Keystrokes | HUD | WASD, mouse buttons and space bar with CPS |
 | Armor Status | HUD | Armor and held item with durability |
+| Ping | HUD | Latency to the server |
+| Clock | HUD | Real-world time (12 h / 24 h) |
+| Speed | HUD | Movement speed in blocks per second |
+| Server Address | HUD | Which server you are on |
 | Zoom | Visual | Hold **C**, scroll to change zoom level |
 | Fullbright | Visual | Full brightness without a gamma hack |
+| Custom Crosshair | Visual | Style, color, size, gap, thickness, outline |
+| Low Health Warning | Visual | Pulsing red screen edge when health is low |
 | Custom Main Menu | Utility | Voxira title screen |
+| Auto Reconnect | Utility | Rejoins the last server after a countdown |
+| AutoLog | Safety | Leaves automatically on low health, hostile mobs, nearby players or players teleporting to you |
 
-- **Mod menu:** press `Right Shift` to toggle modules with one click and filter them by category.
-- **HUD editor:** click "HUD bearbeiten" in the mod menu, then drag modules around. They snap to the screen edges and the center.
+- **Mod menu:** press `Right Shift`. Left click a module to toggle it, right click to open its settings.
+- **HUD editor:** click "Edit HUD" in the mod menu, then drag modules around. They snap to the screen edges and the center.
 - **Config:** saved automatically to `.minecraft/config/voxira.json`.
 
-> The in-game UI is currently in German. English localization is planned.
+### AutoLog settings
+
+| Setting | Default |
+|---|---|
+| Low health | On, at 1 heart |
+| Only with hostile mob near | On, within 8 blocks |
+| Player nearby | Off, 32 blocks |
+| Player teleports to you | Off, 12 blocks |
+| Turn off after leaving | On |
+
+> Some servers treat leaving during a fight as combat logging. Check the server rules.
 
 ## Installation
 
@@ -65,8 +83,9 @@ src/main/java/dev/voxira/client/
 
 1. Create a class that extends `Module` (or `HudModule` for HUD elements)
 2. Register it in `ModuleManager` with `add(new YourModule())`
+3. Optional: add settings with `setting(new BoolSetting(...))`, `NumberSetting` or `ModeSetting`
 
-It shows up in the mod menu automatically, and its state is saved in the config.
+It shows up in the mod menu automatically, and its state and settings are saved in the config.
 
 ### Publishing a release
 

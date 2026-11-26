@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
-/** Tauscht den Vanilla-Titelbildschirm gegen das Voxira-Hauptmenü. */
+/** Swaps the vanilla title screen for the Voxira one. */
 @Mixin(Gui.class)
 public abstract class GuiMixin {
     @ModifyVariable(method = "setScreen", at = @At("HEAD"), argsOnly = true)

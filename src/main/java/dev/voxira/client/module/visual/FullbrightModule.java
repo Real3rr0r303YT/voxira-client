@@ -4,11 +4,11 @@ import dev.voxira.client.module.Category;
 import dev.voxira.client.module.Module;
 
 /**
- * Volle Helligkeit ohne Gamma-Hack: setzt clientseitig die Nachtsicht-Intensität
- * der Lightmap (siehe {@code LightmapRenderStateExtractorMixin}).
+ * Full brightness without a gamma hack: sets the lightmap's night vision
+ * intensity on the client (see {@code LightmapRenderStateExtractorMixin}).
  */
 public class FullbrightModule extends Module {
     public FullbrightModule() {
-        super("fullbright", "Fullbright", "Alles hell – Höhlen ohne Fackeln.", Category.VISUAL, false);
+        super("fullbright", "Fullbright", "Everything bright, caves without torches.", Category.VISUAL, false);
     }
 }

@@ -5,7 +5,7 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 
-/** Rüstung + Haupthand mit verbleibender Haltbarkeit. */
+/** Armor + main hand with remaining durability. */
 public class ArmorStatusModule extends HudModule {
     private static final EquipmentSlot[] SLOTS = {
             EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET, EquipmentSlot.MAINHAND
@@ -13,7 +13,7 @@ public class ArmorStatusModule extends HudModule {
     private static final int ROW = 18;
 
     public ArmorStatusModule() {
-        super("armor_status", "Armor Status", "Rüstung und Item in der Hand mit Haltbarkeit.", true, 4, 140);
+        super("armor_status", "Armor Status", "Armor and held item with durability.", true, 4, 140);
     }
 
     @Override

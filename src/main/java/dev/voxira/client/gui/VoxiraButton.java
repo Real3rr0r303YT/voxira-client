@@ -7,7 +7,7 @@ import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.client.input.InputWithModifiers;
 import net.minecraft.network.chat.Component;
 
-/** Flacher Button im Voxira-Stil mit Akzentleiste beim Hover. */
+/** Flat Voxira-style button with an accent bar on hover. */
 public class VoxiraButton extends AbstractButton {
     private final Runnable action;
 

@@ -1,10 +1,15 @@
 package dev.voxira.client.module;
 
+import dev.voxira.client.module.setting.Setting;
 import net.minecraft.client.Minecraft;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 /**
- * Basis aller Voxira-Module. Ein Modul hat eine feste ID (für die Config),
- * einen Anzeigenamen, eine Kategorie und kann an-/ausgeschaltet werden.
+ * Base of every Voxira module: a fixed id (used in the config), a display name,
+ * a category, an on/off state and optional settings.
  */
 public abstract class Module {
     protected static final Minecraft MC = Minecraft.getInstance();
@@ -14,6 +19,7 @@ public abstract class Module {
     private final String description;
     private final Category category;
     private boolean enabled;
+    private final List<Setting<?>> settings = new ArrayList<>();
 
     protected Module(String id, String name, String description, Category category, boolean enabledByDefault) {
         this.id = id;
@@ -37,6 +43,16 @@ public abstract class Module {
 
     public final Category category() {
         return category;
+    }
+
+    /** Registers a setting; call from field initializers in subclasses. */
+    protected final <S extends Setting<?>> S setting(S setting) {
+        settings.add(setting);
+        return setting;
+    }
+
+    public final List<Setting<?>> settings() {
+        return Collections.unmodifiableList(settings);
     }
 
     public final boolean isEnabled() {
@@ -65,7 +81,7 @@ public abstract class Module {
     protected void onDisable() {
     }
 
-    /** Wird jeden Client-Tick aufgerufen, solange das Modul aktiv ist. */
+    /** Called every client tick while the module is enabled. */
     public void onTick() {
     }
 }

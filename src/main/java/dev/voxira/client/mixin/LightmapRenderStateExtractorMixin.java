@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-/** Fullbright: maximale Nachtsicht-Intensität in der Lightmap. */
+/** Fullbright: maximum night vision intensity in the lightmap. */
 @Mixin(LightmapRenderStateExtractor.class)
 public abstract class LightmapRenderStateExtractorMixin {
     @Inject(method = "extract", at = @At("TAIL"))

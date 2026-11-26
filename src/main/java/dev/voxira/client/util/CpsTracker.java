@@ -3,7 +3,7 @@ package dev.voxira.client.util;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-/** Zählt Klicks der letzten Sekunde für linke und rechte Maustaste. */
+/** Counts clicks in the last second for the left and right mouse button. */
 public final class CpsTracker {
     private static final Deque<Long> LEFT = new ArrayDeque<>();
     private static final Deque<Long> RIGHT = new ArrayDeque<>();

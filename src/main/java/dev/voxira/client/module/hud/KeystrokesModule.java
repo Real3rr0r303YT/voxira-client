@@ -5,7 +5,7 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Options;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 
-/** Klassisches WASD + Maus + Leertaste Overlay. */
+/** Classic WASD + mouse + space bar overlay. */
 public class KeystrokesModule extends HudModule {
     private static final int KEY = 22;
     private static final int GAP = 2;
@@ -13,7 +13,7 @@ public class KeystrokesModule extends HudModule {
     private static final int PRESSED = 0xD08B6CFF;
 
     public KeystrokesModule() {
-        super("keystrokes", "Keystrokes", "Zeigt gedrückte Bewegungs- und Maustasten.", true, 4, 60);
+        super("keystrokes", "Keystrokes", "Shows pressed movement and mouse keys.", true, 4, 60);
     }
 
     @Override

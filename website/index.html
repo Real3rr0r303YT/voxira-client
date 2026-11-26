@@ -48,7 +48,7 @@
           <div class="cta">
             <a class="btn" href="https://github.com/Real3rr0r303YT/voxira-client/releases">
               <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 3a1 1 0 0 1 1 1v9.59l3.3-3.3a1 1 0 1 1 1.4 1.42l-5 5a1 1 0 0 1-1.4 0l-5-5a1 1 0 1 1 1.4-1.42l3.3 3.3V4a1 1 0 0 1 1-1ZM5 19a1 1 0 1 0 0 2h14a1 1 0 1 0 0-2H5Z"/></svg>
-              Download v0.1.0
+              Download v0.2.0
             </a>
             <a class="btn btn-ghost" href="https://github.com/Real3rr0r303YT/voxira-client">
               <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02a9.56 9.56 0 0 1 5 0c1.91-1.3 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
@@ -107,7 +107,7 @@
           <article class="card">
             <div class="icon"><svg viewBox="0 0 24 24"><path d="M4 5h16v10H4z M8 19h8 M12 15v4"/></svg></div>
             <h3>HUD modules</h3>
-            <p>FPS, CPS, coordinates, keystrokes and armor with durability. Toggle each one on its own.</p>
+            <p>FPS, CPS, coordinates, keystrokes, armor, ping, clock, speed and server. Toggle each one on its own.</p>
           </article>
           <article class="card">
             <div class="icon"><svg viewBox="0 0 24 24"><path d="M5 9V5h4 M15 5h4v4 M19 15v4h-4 M9 19H5v-4 M9 12h6 M12 9v6"/></svg></div>
@@ -130,6 +130,21 @@
             <p>A clean title screen with panorama and Voxira branding. Switch it off in the mod menu if you prefer vanilla.</p>
           </article>
           <article class="card">
+            <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z M9 12l2 2 4-4"/></svg></div>
+            <h3>AutoLog</h3>
+            <p>Leaves for you at 1 heart with a mob nearby, when a player comes close or teleports to you. Every trigger is configurable.</p>
+          </article>
+          <article class="card">
+            <div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 2v5 M12 17v5 M2 12h5 M17 12h5"/></svg></div>
+            <h3>Custom crosshair</h3>
+            <p>Cross, dot or circle. Pick color, size, gap, thickness and outline.</p>
+          </article>
+          <article class="card">
+            <div class="icon"><svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6 M20 4v5h-5"/></svg></div>
+            <h3>Auto reconnect</h3>
+            <p>Kicked or lagged out? Voxira rejoins the last server after a countdown you set.</p>
+          </article>
+          <article class="card">
             <div class="icon"><svg viewBox="0 0 24 24"><path d="M8 6l-6 6 6 6 M16 6l6 6-6 6 M14 4l-4 16"/></svg></div>
             <h3>Open Source</h3>
             <p>GPL-3.0 on GitHub. Read the code, build it yourself and write your own modules in a few lines.</p>
@@ -144,20 +159,21 @@
         <div>
           <p class="eyebrow">Mod menu</p>
           <h2><kbd class="kbd-big">Right Shift</kbd><br>and it's all there.</h2>
-          <p class="lead">Filter modules by category and toggle them with one click. Your settings are saved automatically.</p>
+          <p class="lead">Filter modules by category, toggle them with a left click and tune them with a right click. Everything is saved automatically.</p>
           <p class="fine">Try it: the cards are clickable.</p>
         </div>
 
         <div class="modmenu" id="modmenu">
           <div class="mm-head">
             <span><b>VOXIRA</b> <i>Mods</i></span>
-            <small>click = on/off</small>
+            <small>left: toggle · right: settings</small>
           </div>
           <div class="mm-tabs" role="tablist">
             <button class="active" data-filter="all" role="tab" aria-selected="true">All</button>
             <button data-filter="hud" role="tab" aria-selected="false">HUD</button>
             <button data-filter="visual" role="tab" aria-selected="false">Visual</button>
             <button data-filter="utility" role="tab" aria-selected="false">Utility</button>
+            <button data-filter="safety" role="tab" aria-selected="false">Safety</button>
           </div>
           <div class="mm-grid" id="mm-grid"></div>
           <div class="mm-foot">
@@ -202,7 +218,7 @@
         <h2>Frequently asked questions</h2>
         <details>
           <summary>Can I get banned for using it?</summary>
-          <p>Voxira contains no cheats, only display and comfort features like the HUD, zoom and fullbright. Some servers do ban specific features such as fullbright or zoom, so check the server rules if in doubt.</p>
+          <p>Voxira contains no cheats, only display, comfort and safety features. Some servers do ban specific features: fullbright, zoom, or leaving during a fight (combat logging) with AutoLog. Check the server rules if in doubt.</p>
         </details>
         <details>
           <summary>Which Minecraft version is supported?</summary>

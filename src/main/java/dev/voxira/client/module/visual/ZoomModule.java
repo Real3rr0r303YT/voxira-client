@@ -4,8 +4,8 @@ import dev.voxira.client.module.Category;
 import dev.voxira.client.module.Module;
 
 /**
- * Zoom per Taste (Standard: C). Mausrad passt die Stärke an, solange gezoomt wird.
- * Der eigentliche FOV-Eingriff passiert in {@code CameraMixin}.
+ * Zoom while a key is held (default: C). Scrolling adjusts the level while zooming.
+ * The actual FOV change happens in {@code CameraMixin}.
  */
 public class ZoomModule extends Module {
     private static final float MIN_ZOOM = 1.5f;
@@ -19,10 +19,10 @@ public class ZoomModule extends Module {
     private boolean savedSmoothCamera;
 
     public ZoomModule() {
-        super("zoom", "Zoom", "Halte die Zoom-Taste (C). Mausrad ändert die Stärke.", Category.VISUAL, true);
+        super("zoom", "Zoom", "Hold the zoom key (C). Scroll to change the zoom level.", Category.VISUAL, true);
     }
 
-    /** Wird jeden Tick vom Keybind-Handler aufgerufen. */
+    /** Called every tick by the keybind handler. */
     public void setKeyHeld(boolean held) {
         boolean shouldZoom = held && isEnabled() && MC.gui.screen() == null;
         if (shouldZoom == active) {
@@ -54,7 +54,7 @@ public class ZoomModule extends Module {
         current = previous = 1f;
     }
 
-    /** @return true, wenn das Scroll-Event verbraucht wurde. */
+    /** @return true if the scroll event was consumed. */
     public boolean onScroll(double amount) {
         if (!active || amount == 0) {
             return false;
@@ -63,7 +63,7 @@ public class ZoomModule extends Module {
         return true;
     }
 
-    /** Interpolierter Divisor für das FOV (1 = kein Zoom). */
+    /** Interpolated FOV divisor (1 = no zoom). */
     public float fovDivisor(float partialTick) {
         return previous + (current - previous) * partialTick;
     }

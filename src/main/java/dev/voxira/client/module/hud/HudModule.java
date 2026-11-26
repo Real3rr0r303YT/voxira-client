@@ -5,8 +5,8 @@ import dev.voxira.client.module.Module;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 
 /**
- * Ein verschiebbares HUD-Element. Position wird in GUI-Pixeln gespeichert
- * und beim Rendern an die aktuelle Fenstergröße angepasst.
+ * A draggable HUD element. The position is stored in GUI pixels and
+ * clamped to the current window size when rendering.
  */
 public abstract class HudModule extends Module {
     public static final int BACKGROUND = 0x90101018;
@@ -26,7 +26,7 @@ public abstract class HudModule extends Module {
 
     public abstract int height();
 
-    /** Zeichnet das Modul mit linker oberer Ecke bei (0, 0). */
+    /** Draws the module with its top-left corner at (0, 0). */
     protected abstract void draw(GuiGraphicsExtractor ctx);
 
     public final void render(GuiGraphicsExtractor ctx) {
@@ -59,7 +59,7 @@ public abstract class HudModule extends Module {
         this.y = y;
     }
 
-    /** Hilfsfunktion: Textbox im typischen Voxira-Stil. */
+    /** Helper: text box in the Voxira style. */
     protected void drawLabel(GuiGraphicsExtractor ctx, String text) {
         ctx.fill(0, 0, width(), height(), BACKGROUND);
         ctx.fill(0, 0, 2, height(), ACCENT);

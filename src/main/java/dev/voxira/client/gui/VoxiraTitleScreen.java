@@ -9,7 +9,7 @@ import net.minecraft.client.gui.screens.options.OptionsScreen;
 import net.minecraft.client.gui.screens.worldselection.SelectWorldScreen;
 import net.minecraft.network.chat.Component;
 
-/** Voxira-Hauptmenü: Panorama, großes Logo, schlanke Button-Spalte. */
+/** Voxira title screen: panorama, big logo, slim button column. */
 public class VoxiraTitleScreen extends Screen {
     private static final int BUTTON_WIDTH = 200;
     private static final int BUTTON_HEIGHT = 22;
@@ -77,7 +77,7 @@ public class VoxiraTitleScreen extends Screen {
 
         // Footer
         ctx.text(font, footerLeft, 4, height - 12, Theme.TEXT_DIM, true);
-        String notice = "Nicht offiziell von Mojang oder Microsoft";
+        String notice = "Not affiliated with Mojang or Microsoft";
         ctx.text(font, notice, width - font.width(notice) - 4, height - 12, Theme.TEXT_DIM, true);
     }
 

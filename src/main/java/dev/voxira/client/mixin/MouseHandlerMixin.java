@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(MouseHandler.class)
 public abstract class MouseHandlerMixin {
-    /** CPS-Zählung: nur echte Klicks im Spiel, nicht in Menüs. */
+    /** CPS counting: only real in-game clicks, not in menus. */
     @Inject(method = "onButton", at = @At("HEAD"))
     private void voxira$countClick(long window, MouseButtonInfo info, int action, CallbackInfo ci) {
         if (action == InputConstants.PRESS && Minecraft.getInstance().gui.screen() == null) {
@@ -21,7 +21,7 @@ public abstract class MouseHandlerMixin {
         }
     }
 
-    /** Mausrad ändert die Zoom-Stärke, solange gezoomt wird. */
+    /** Scrolling changes the zoom level while zooming. */
     @Inject(method = "onScroll", at = @At("HEAD"), cancellable = true)
     private void voxira$zoomScroll(long window, double xOffset, double yOffset, CallbackInfo ci) {
         if (VoxiraClient.modules().zoom.onScroll(yOffset)) {

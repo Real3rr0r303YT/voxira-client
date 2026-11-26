@@ -1,6 +1,6 @@
 package dev.voxira.client.gui;
 
-/** Zentrale Farbpalette (ARGB) für alle Voxira-Oberflächen. */
+/** Shared color palette (ARGB) for all Voxira screens. */
 public final class Theme {
     public static final int ACCENT = 0xFF8B6CFF;
     public static final int ACCENT_DARK = 0xFF5B3FD9;

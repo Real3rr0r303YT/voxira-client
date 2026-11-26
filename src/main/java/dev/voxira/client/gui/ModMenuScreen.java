@@ -13,7 +13,7 @@ import org.jspecify.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Mod-Menü (Right Shift): Module nach Kategorie filtern und per Klick umschalten. */
+/** Mod menu (Right Shift): filter modules by category, left click toggles, right click opens settings. */
 public class ModMenuScreen extends Screen {
     private static final int COLUMNS = 3;
     private static final int CARD_HEIGHT = 46;
@@ -46,7 +46,7 @@ public class ModMenuScreen extends Screen {
         int buttonY = panelY + panelH - FOOTER + 6;
         int buttonW = 110;
         addRenderableWidget(new VoxiraButton(panelX + 10, buttonY, buttonW, 20,
-                Component.literal("HUD bearbeiten"),
+                Component.literal("Edit HUD"),
                 () -> minecraft.gui.setScreen(new HudEditorScreen(this))));
         addRenderableWidget(new VoxiraButton(panelX + panelW - 10 - buttonW, buttonY, buttonW, 20,
                 Component.translatable("gui.done"), this::onClose));
@@ -90,10 +90,10 @@ public class ModMenuScreen extends Screen {
         return Math.max(0, content - (gridBottom() - gridTop()));
     }
 
-    private static final Category[] TAB_ORDER = {null, Category.HUD, Category.VISUAL, Category.UTILITY};
+    private static final Category[] TAB_ORDER = {null, Category.HUD, Category.VISUAL, Category.UTILITY, Category.SAFETY};
 
     private String tabLabel(@Nullable Category c) {
-        return c == null ? "Alle" : c.displayName();
+        return c == null ? "All" : c.displayName();
     }
 
     private int tabX(int index) {
@@ -116,7 +116,7 @@ public class ModMenuScreen extends Screen {
 
         ctx.text(font, "VOXIRA", panelX + 10, panelY + 10, Theme.TEXT, true);
         ctx.text(font, "Mods", panelX + 14 + font.width("VOXIRA"), panelY + 10, Theme.ACCENT, true);
-        String hint = "Klick = an/aus";
+        String hint = "Left click: toggle  •  Right click: settings";
         ctx.text(font, hint, panelX + panelW - 10 - font.width(hint), panelY + 10, Theme.TEXT_DIM, false);
 
         // Tabs
@@ -131,7 +131,7 @@ public class ModMenuScreen extends Screen {
             ctx.text(font, label, x + 8, tabY + 4, selected ? Theme.TEXT : Theme.TEXT_DIM, false);
         }
 
-        // Karten
+        // Cards
         ctx.enableScissor(panelX, gridTop(), panelX + panelW, gridBottom());
         List<Module> modules = visibleModules();
         int cw = cardWidth();
@@ -148,13 +148,17 @@ public class ModMenuScreen extends Screen {
             ctx.text(font, m.name(), x + 6, y + 6, Theme.TEXT, false);
             ctx.text(font, m.category().displayName(), x + 6, y + 17, Theme.ACCENT, false);
 
-            // Schalter
+            // Toggle switch
             int sw = 20;
             int sx = x + cw - sw - 6;
             int sy = y + 6;
             ctx.fill(sx, sy, sx + sw, sy + 9, m.isEnabled() ? Theme.ON : Theme.OFF);
             int knob = m.isEnabled() ? sx + sw - 8 : sx + 1;
             ctx.fill(knob, sy + 1, knob + 7, sy + 8, Theme.TEXT);
+
+            if (!m.settings().isEmpty()) {
+                ctx.text(font, "⚙", sx - 11, sy, hover ? Theme.ACCENT : Theme.TEXT_DIM, false);
+            }
 
             String desc = font.plainSubstrByWidth(m.description(), cw - 12);
             ctx.text(font, desc, x + 6, y + 31, Theme.TEXT_DIM, false);
@@ -173,9 +177,10 @@ public class ModMenuScreen extends Screen {
         if (super.mouseClicked(event, doubleClick)) {
             return true;
         }
-        if (event.button() != 0) {
+        if (event.button() != 0 && event.button() != 1) {
             return false;
         }
+        boolean rightClick = event.button() == 1;
         double mx = event.x();
         double my = event.y();
 
@@ -183,7 +188,7 @@ public class ModMenuScreen extends Screen {
         for (int i = 0; i < TAB_ORDER.length; i++) {
             int x = tabX(i);
             int w = font.width(tabLabel(TAB_ORDER[i])) + 16;
-            if (mx >= x && mx < x + w && my >= tabY && my < tabY + TABS - 4) {
+            if (!rightClick && mx >= x && mx < x + w && my >= tabY && my < tabY + TABS - 4) {
                 filter = TAB_ORDER[i];
                 scroll = 0;
                 return true;
@@ -199,7 +204,11 @@ public class ModMenuScreen extends Screen {
             int x = cardX(i);
             int y = cardY(i);
             if (mx >= x && mx < x + cw && my >= y && my < y + CARD_HEIGHT) {
-                modules.get(i).toggle();
+                if (rightClick) {
+                    minecraft.gui.setScreen(new SettingsScreen(this, modules.get(i)));
+                } else {
+                    modules.get(i).toggle();
+                }
                 return true;
             }
         }

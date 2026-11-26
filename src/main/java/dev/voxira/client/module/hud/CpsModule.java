@@ -5,7 +5,7 @@ import net.minecraft.client.gui.GuiGraphicsExtractor;
 
 public class CpsModule extends HudModule {
     public CpsModule() {
-        super("cps", "CPS", "Klicks pro Sekunde (links | rechts).", true, 4, 22);
+        super("cps", "CPS", "Clicks per second (left | right).", true, 4, 22);
     }
 
     @Override

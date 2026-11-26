@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-/** Zoom: teilt das berechnete Sichtfeld durch den aktuellen Zoom-Faktor. */
+/** Zoom: divides the computed field of view by the current zoom factor. */
 @Mixin(Camera.class)
 public abstract class CameraMixin {
     @Inject(method = "calculateFov", at = @At("RETURN"), cancellable = true)
